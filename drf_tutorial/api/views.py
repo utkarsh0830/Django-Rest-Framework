@@ -48,7 +48,7 @@ def ItemDetailView(request,pk):
     
 """
 
-#Class Based API View
+# Class Based API View
 """
 class ItemView(APIView):
     def get(self,request):
@@ -95,7 +95,7 @@ class ItemDetailView(APIView):
 
  """
 
-#Mixins Model View
+# Mixins Model View
 """
 class ItemView(mixins.ListModelMixin,mixins.CreateModelMixin,generics.GenericAPIView):
     queryset = Item.objects.all()
@@ -122,7 +122,17 @@ class ItemDetailView(mixins.RetrieveModelMixin,mixins.DestroyModelMixin,mixins.U
         return self.destroy(request,pk)
 """
 
+# Generics Based API View
+"""
+class ItemView(generics.ListAPIView,generics.CreateAPIView):
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
 
+class ItemDetailView(generics.RetrieveAPIView,generics.DestroyAPIView,generics.UpdateAPIView):
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
+
+"""
         
 
     
