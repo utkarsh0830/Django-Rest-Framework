@@ -6,7 +6,7 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 from rest_framework import mixins
-from rest_framework import generics
+from rest_framework import generics,viewsets
 
 # Function Based API View
 """
@@ -131,8 +131,26 @@ class ItemView(generics.ListAPIView,generics.CreateAPIView):
 class ItemDetailView(generics.RetrieveAPIView,generics.DestroyAPIView,generics.UpdateAPIView):
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
+    lookup_field = 'pk'
+
+----- Different Generics Combined Methods ------ 
+
+class ItemView(generics.ListCreateAPIView):
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
+
+class ItemDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
+    lookup_field = 'pk'
+        
+"""
 
 """
-        
+# Model View Sets
+class ItemViewSets(viewsets.ModelViewSet):
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
+    lookup_field = 'pk'
 
-    
+"""
