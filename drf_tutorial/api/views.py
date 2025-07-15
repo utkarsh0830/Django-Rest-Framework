@@ -5,8 +5,10 @@ from .serializers import ItemSerializer
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
+from rest_framework import mixins
+from rest_framework import generics
 
-# Function Based API Views
+# Function Based API View
 """
 @api_view(['GET','POST'])
 def ItemView(request):
@@ -92,6 +94,34 @@ class ItemDetailView(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
  """
+
+#Mixins Model View
+"""
+class ItemView(mixins.ListModelMixin,mixins.CreateModelMixin,generics.GenericAPIView):
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
+
+    def get(self,request):
+        return self.list(request)
+    
+    def post(self,request):
+        return self.create(request)
+
+class ItemDetailView(mixins.RetrieveModelMixin,mixins.DestroyModelMixin,mixins.UpdateModelMixin,generics.GenericAPIView):
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
+    lookup_field = 'pk'
+
+    def get(self,request,pk):
+        return self.retrieve(request,pk)
+    
+    def put(self,request,pk):
+        return self.update(request,pk)
+    
+    def delete(self,request,pk):
+        return self.destroy(request,pk)
+"""
+
 
         
 
