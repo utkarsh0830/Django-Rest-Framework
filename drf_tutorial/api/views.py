@@ -146,8 +146,8 @@ class ItemDetailView(generics.RetrieveUpdateDestroyAPIView):
         
 """
 
-"""
 # Model View Sets
+"""
 class ItemViewSets(viewsets.ModelViewSet):
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
