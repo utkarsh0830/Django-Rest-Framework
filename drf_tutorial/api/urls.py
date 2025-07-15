@@ -5,6 +5,7 @@ from rest_framework.routers import DefaultRouter
 router = DefaultRouter()
 
 router.register('items',views.ItemViewSets)
+router.register('orders',views.OrderViewSets)
 
 urlpatterns = [
 #    path('items/',views.ItemView),

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.response import Response
-from .models import Item
-from .serializers import ItemSerializer
+from .models import Item,Order
+from .serializers import ItemSerializer,OrderSerializer
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
@@ -154,3 +154,15 @@ class ItemViewSets(viewsets.ModelViewSet):
     lookup_field = 'pk'
 
 """
+
+
+# Nested Serializers
+class ItemViewSets(viewsets.ModelViewSet):
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
+    
+
+class OrderViewSets(viewsets.ModelViewSet):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+    
