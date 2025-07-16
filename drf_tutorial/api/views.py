@@ -9,6 +9,8 @@ from rest_framework import mixins
 from rest_framework import generics,viewsets
 from .pagination import CustomPagination
 from .filters import CustomFilter
+from rest_framework.filters import SearchFilter
+
 # Function Based API View
 """
 @api_view(['GET','POST'])
@@ -163,6 +165,8 @@ class ItemViewSets(viewsets.ModelViewSet):
     serializer_class = ItemSerializer
     pagination_class = CustomPagination
     filterset_class = CustomFilter
+    filter_backends = [SearchFilter]
+    search_fields = ['name','description']
     
 
 class OrderViewSets(viewsets.ModelViewSet):
